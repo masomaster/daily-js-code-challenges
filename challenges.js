@@ -12,7 +12,9 @@ Examples:
 sayHello() //=> Hello!
 -----------------------------------------------------------------*/
 // Your solution for 00-sayHello (example) here:
-
+function sayHello() {
+  console.log("Hello!");
+}
 
 
 
@@ -31,7 +33,9 @@ addOne(1) //=> 2
 addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
-
+function addOne(num) {
+  return num+1;
+}
 
 
 

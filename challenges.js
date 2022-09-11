@@ -13,7 +13,7 @@ sayHello() //=> Hello!
 -----------------------------------------------------------------*/
 // Your solution for 00-sayHello (example) here:
 function sayHello() {
-  console.log("Hello!");
+  return 'Hello!';
 }
 
 
@@ -34,10 +34,13 @@ addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
 function addOne(num) {
-  return num+1;
+  if (!isNaN(num)) {
+    return num+1;
+  } else {
+    return NaN;
+  }
 }
-
-
+// console.log(addOne(NaN));
 
 /*-----------------------------------------------------------------
 Challenge: 02-addTwoNumbers
@@ -62,7 +65,7 @@ addTwoNumbers('Hello', 5) //=> NaN
 // Your solution for 02-addTwoNumbers here:
 function addTwoNumbers(num1, num2) {
   if (typeof num1 === "number" && typeof num2 === "number") return num1+num2;
-  else return "NaN";
+  else return NaN;
 }
 
 
@@ -91,8 +94,8 @@ function sumNumbers(arr) {
     sum = sum+arr[i];
   }   
   return sum;
-  } 5
-console.log(sumNumbers([]));
+} 
+
 
 
 
@@ -116,10 +119,14 @@ add(7,-12) //=> -5
 // Your solution for 04-addList here:
 function addList() {
   let sum = 0;
-
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
 }
-
-
+// console.log(addList(5,6,3,8,10,54));
+// console.log(addList());
+// console.log(addList(1,2,3,4));
 
 /*-----------------------------------------------------------------
 Challenge: 05-computeRemainder
@@ -140,8 +147,18 @@ computeRemainder(4,0) //=> Infinity
 computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
-
-
+function computeRemainder (num1, num2) {
+  if (num2 === 0) {
+    return Infinity;
+  } else {
+    let remainder;
+    let q = parseInt(num1/num2);
+    let p = q*num2;
+    remainder = num1-p;
+    return remainder;
+  }
+}
+// console.log(computeRemainder(9, 4));
 
 /*-----------------------------------------------------------------
 Challenge: 06-range
@@ -162,8 +179,21 @@ range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------*/
 // Your solution for 06-range here:
 
-
-  
+function range(num1, num2) {
+  if (num1 === NaN || typeof num1 !== "number" || num2 === NaN || typeof num2 !== "number" ) {
+    return 'Please enter numbers';
+  } else if (num1 > num2) {
+    return 'First argument must be less than second';
+  } else {
+    let arr = [];
+    for (let i = num1; i < num2; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
+}
+// This function doesn't *force* arguments to be integers; it only assumes they will be.
+// console.log(range(5, 10));
   
   
 
@@ -175,7 +205,7 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function called reverseUpcaseString that accepts a single string argument, then returns the string with its characters in reverse orderand converts all characters to uppercase.
+- Write a function called reverseUpcaseString that accepts a single string argument, then returns the string with its characters in reverse order and converts all characters to uppercase.
 
 Examples:
 
@@ -183,7 +213,14 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 -----------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
 
-
+function reverseUpcaseString (oldStr) {
+  let newStr = '';
+  for (let i = (oldStr.length - 1); i >= 0; i--) {
+    newStr += oldStr[i];
+  }
+  newStr = newStr.toUpperCase();
+  return newStr;
+}
 
 
 /*-----------------------------------------------------------------
@@ -193,7 +230,7 @@ Difficulty: Basic
 
 Prompt:
 
-- Write a function called removeEnds that accepts a single string argument, then returns the a string with the first and last characters removed.
+- Write a function called removeEnds that accepts a single string argument, then returns a string with the first and last characters removed.
 - If the length of the string argument is less than 3, return an empty string.
 
 Examples:
@@ -203,8 +240,15 @@ removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
 
-
-
+function removeEnds (oldStr) {
+  if (oldStr.length<3) {
+    return '';
+  } else {
+    let newStr = oldStr.slice(1, oldStr.length -1)
+    return newStr;
+  }
+}
+// console.log(removeEnds('coffee'));
 
 
 /*-----------------------------------------------------------------
@@ -228,7 +272,11 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
-
+function charCount (str) {
+  let count = {};
+  
+  return count;
+}
 
 
 

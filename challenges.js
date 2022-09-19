@@ -40,7 +40,6 @@ function addOne(num) {
     return NaN;
   }
 }
-// console.log(addOne(NaN));
 
 /*-----------------------------------------------------------------
 Challenge: 02-addTwoNumbers
@@ -124,9 +123,6 @@ function addList() {
   }
   return sum;
 }
-// console.log(addList(5,6,3,8,10,54));
-// console.log(addList());
-// console.log(addList(1,2,3,4));
 
 /*-----------------------------------------------------------------
 Challenge: 05-computeRemainder
@@ -158,7 +154,6 @@ function computeRemainder (num1, num2) {
     return remainder;
   }
 }
-// console.log(computeRemainder(9, 4));
 
 /*-----------------------------------------------------------------
 Challenge: 06-range
@@ -193,7 +188,6 @@ function range(num1, num2) {
   }
 }
 // This function doesn't *force* arguments to be integers; it only assumes they will be.
-// console.log(range(5, 10));
   
   
 
@@ -248,7 +242,6 @@ function removeEnds (oldStr) {
     return newStr;
   }
 }
-// console.log(removeEnds('coffee'));
 
 
 /*-----------------------------------------------------------------
@@ -273,11 +266,12 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 // Your solution for 09-charCount here:
 
 function charCount (str) {
-  let count = {};
-  
-  return count;
+  let countedArr = str.split('').reduce(function(acc, char) {
+    acc[char] = acc[char] ? acc[char] + 1 : 1;
+    return acc;
+  }, {});
+  return countedArr;
 }
-
 
 
 /*-----------------------------------------------------------------

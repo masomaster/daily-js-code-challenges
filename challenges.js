@@ -296,9 +296,16 @@ formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
-
-
-
+function formatWithPadding(int, pad, length) {
+  int = String(int);
+  length = length - int.length;
+  while (length > 0) {
+    int = pad + int;
+    length--;
+  }
+  return int;
+}
+// Note to self: I see now I could have made DRYer code by combining lines 301-302: while (int.length < length)
 
 
 /*-----------------------------------------------------------------
@@ -322,8 +329,17 @@ isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
+function isPalindrome(str) {
+  let filteredArr = str.toLowerCase().split("").filter(function(char) {
+    if (char !== " ") return char;
+  })
 
+  let reversedStr = [...filteredArr].reverse().join("");
 
+  let filteredStr = filteredArr.join("");
+  
+  return (filteredStr === reversedStr ? true : false);
+}
 
 
 /*-----------------------------------------------------------------
@@ -348,8 +364,19 @@ hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
-
-
+function hammingDistance(str1, str2) {
+  if (str1.length !== str2.length) {
+    return NaN
+  } else {
+    let count = 0
+    for (let i = 0; i < str1.length; i++) {
+      if (str1[i] !== str2[i]) {
+        count++
+      }
+    }
+    return count
+  }
+}
 
 
 
@@ -373,9 +400,21 @@ mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
 
+function mumble(str) {
+  let mumbledStr = ''
+  for (let i = 0; i < str.length; i++) {
+    if (i !== 0) {
+      mumbledStr = mumbledStr + '-'
+    }
+    for (let j=i+1; j > 0; j--) {
+      mumbledStr += str[i]
+    }
+  }
+  return mumbledStr
+}
 
-
-
+// solution has clean one-liner that replaces my inner if and for loops:     result += ((i || '') && '-') + str.charAt(i).repeat(i + 1);
+// solution also has a one-line function by converting string to array first
 
 /*-----------------------------------------------------------------
 Challenge: 14-fromPairs
@@ -395,9 +434,13 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
 
-
-
-
+function fromPairs(arrOfArrs) {
+  let obj = {}
+  arrOfArrs.forEach(function(arr) {
+    obj[arr[0]] = arr[1]
+  })
+  return obj
+}
 
 
 
@@ -419,7 +462,16 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c:
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
 
+function mergeObjects() {
+  // get first obj (firstObj) and assign to variable for quick access
 
+  // for each argument (arg),
+    // for each key/value pair,
+
+      // firstObj[arg.key] = arg.val
+
+  // return firstObj
+}
 
 
 

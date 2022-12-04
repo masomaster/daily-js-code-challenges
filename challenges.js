@@ -463,16 +463,12 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c:
 // Your solution for 15-mergeObjects here:
 
 function mergeObjects() {
-  // get first obj (firstObj) and assign to variable for quick access
-
-  // for each argument (arg),
-    // for each key/value pair,
-
-      // firstObj[arg.key] = arg.val
-
-  // return firstObj
+  let firstObj = arguments[0];
+  for (let i = 1; i < arguments.length; i++) {
+    firstObj = Object.assign(firstObj, arguments[i])
+  }
+  return firstObj
 }
-
 
 
 /*-----------------------------------------------------------------
@@ -509,9 +505,13 @@ findHighestPriced([
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
-
-  
-
+function findHighestPriced(arr) {
+  let hiPriceObj = arr[0];
+  arr.forEach((o) => {
+    if (o.price > hiPriceObj.price) hiPriceObj = o
+  })
+  return hiPriceObj;
+}
 
 
 
@@ -543,7 +543,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
 
-
+function mapArray(arr, cb) {
+  let newArr = [];
+  arr.forEach((e, idx) => {
+    newArr[idx] = cb(e, idx)
+  })
+  return newArr;
+}
 
 
 
@@ -581,7 +587,12 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 -----------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
 
-
+function reduceArray(arr, cb, initVal) {
+  arr.forEach((el, idx) => {
+    initVal = cb(initVal, el, idx);
+  })
+  return initVal;
+}
 
 
 /*-----------------------------------------------------------------
@@ -593,7 +604,7 @@ Prompt:
 
 - Write a function named flatten that accepts a single array that may contain nested arrays and returns a new "flattened" array.
 - A flattened array is an array that contains no nested arrays.
-- Arrays maybe nested at any level.
+- Arrays may be nested at any level.
 - If any of the arrays have duplicate values those duplicate values should be present in the returned array.
 - The values in the new array should maintain their ordering as shown in the examples below.
 
@@ -611,8 +622,17 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
 
-
-
+function flatten(arr1) {
+  // let arr2 = arr1.flat(Infinity); // I'm guessing this solution is cheating?
+  let arr2 = [];
+  arr1.forEach((el) => {
+    if (Array.isArray(el)) {
+      arr2 = arr2.concat(flatten(el));
+    }
+    else arr2.push(el);
+  })
+  return arr2;
+}
 
 
 /*-----------------------------------------------------------------
@@ -635,9 +655,15 @@ isPrime(200) //=> false
 -----------------------------------------------------------------*/
 // Your solution for 20-isPrime here:
 
-
+function isPrime(int) {
+  // for each number from 2-int, if int%num !==0, return false
+  if (!Number.isInteger(int) || int < 2) return false;
+  for (let i = 2; i < int; i++) {
+    if (int % i === 0) return false;
+  }
+  return true;
+}
   
-
 
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
@@ -663,8 +689,20 @@ primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
 
-
-
+function primeFactors(int) {
+  let arr = [];
+  if (!Number.isInteger(int) || int < 2) return arr;
+  let i = 2;
+  while (i <= int) {
+    if (int % i === 0 && isPrime(i)) {
+        int = int / i;
+        arr.push(i);
+    } else {
+      i++;
+    }
+  }
+  return arr;
+}
 
 
 /*-----------------------------------------------------------------
@@ -688,8 +726,16 @@ intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------*/
 // Your solution for 22-intersection here:
 
-
-
+function intersection(arr1, arr2) {
+  let arr3 = [];
+  for (let i = 0; i < arr1.length && i < arr2.length; i++) {
+    if (arr2.includes(arr1[i])) arr3.push(arr1[i])
+  }
+  return arr3;
+}
+console.log(intersection(['a', 1], [])) //=> []
+console.log(intersection(['a', 1], [true, 'a', 15])) //=> ['a']
+console.log(intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1])) //=> [1, true, 1]
 
 
 

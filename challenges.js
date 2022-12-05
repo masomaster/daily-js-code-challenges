@@ -733,9 +733,6 @@ function intersection(arr1, arr2) {
   }
   return arr3;
 }
-console.log(intersection(['a', 1], [])) //=> []
-console.log(intersection(['a', 1], [true, 'a', 15])) //=> ['a']
-console.log(intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1])) //=> [1, true, 1]
 
 
 
@@ -762,8 +759,29 @@ balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
 
+function balancedBrackets(str) {
+  let currDepth = -1;
+  const opCh = [ '(', '{', '[' ];
+  const clCh = [ ')', '}', ']' ];
+  const depthTracker = []; // the index of this array corresponds to the depth and stores the last opening character at that depth
 
-
+  for (let i = 0; i < str.length; i++) {
+    if (opCh.includes(str[i])) {
+      currDepth++;
+      depthTracker[currDepth] = str[i];
+    }
+    if (clCh.includes(str[i])) {
+      // Check if the last opening character at the corresponding depth corresponds to the current closing character (str[i])
+      if (depthTracker[currDepth] === opCh[clCh.indexOf(str[i])]) {
+        currDepth--;
+        depthTracker.pop() // this isn't stricly necessary either, as it would just be overwritten if necessary; but it's cleaner
+      } else {
+        return false;
+      }
+    }
+  }
+  return true;
+}
 
   
 

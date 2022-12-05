@@ -811,9 +811,32 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
 
+function isWinningTicket(arr) {
+  let winner = arr.every((a) => {
+    let matches = false;
+    const str = a[0];
+    // iterate through each character (c) in a[0]
+    for (let i = 0; i < str.length; i++) {
+      const c = str[i];
+      // check if character code of c === a[1]
+      if (String.fromCharCode(a[1]) === c) {
+        matches = true;
+        break;
+      }
+    }
+    // AFTER iterating through each character in string, if matches is still false, return false
+    if (!matches) {
+      return false;
+    }
+    return true;
+  })
+  return winner;
+}
 
-
-
+console.log(isWinningTicket( [ ['ABC', 65] ] )) // => true
+console.log(isWinningTicket( [ ['ABC', 999], ['XY', 89] ] )) // => false
+console.log(isWinningTicket( [ ['ABC', 66], ['dddd', 100], ['Hello', 108] ] )) // => true
+console.log(isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] )) // => false
 
 /*-----------------------------------------------------------------
 Challenge: 25-getNumForIP

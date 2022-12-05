@@ -812,20 +812,7 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 // Your solution for 24-isWinningTicket here:
 
 function isWinningTicket(arr) {
-  let winner = arr.every((a) => {
-    let matches = false;
-    for (let i = 0; i < a[0].length; i++) {
-      if (String.fromCharCode(a[1]) === a[0][i]) {
-        matches = true;
-        break;
-      }
-    }
-    if (!matches) {
-      return false;
-    }
-    return true;
-  })
-  return winner;
+  return arr.every(a => a[0].includes(String.fromCharCode(a[1])))
 }
 
 /*-----------------------------------------------------------------

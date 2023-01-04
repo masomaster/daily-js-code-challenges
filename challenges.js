@@ -841,7 +841,8 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
 function getNumForIP(ip) {
-  
+  let [num1, num2, num3, num4] = ip.split(".");
+  return (num1 * (256 ** 3)) + (num2 * (256 ** 2)) + (num3 * (256 ** 1)) + (num4 * (256 ** 0))
 }
 
 

@@ -871,10 +871,12 @@ toCamelCase( 'Mama-mia' ) // => 'MamaMia'
 toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
-
-
-
-
+function toCamelCase(str) {
+  function replacer(match, offset, string) {
+    return match[1].toUpperCase()
+  }
+  return str.replace(/[-_]./g, replacer)
+}
 
 /*-----------------------------------------------------------------
 Challenge: 27-countTheBits

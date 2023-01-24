@@ -990,7 +990,15 @@ addChecker( [10, 15, 16, 22], 19 ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 29-addChecker here:
 
-
+function addChecker(arr, int) {
+  for (const num of arr) {
+    if (arr.includes(int-num)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
 
 

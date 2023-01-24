@@ -938,7 +938,28 @@ gridTrip( [5, 10], 'D5L15U2' ) //-> [2, -5]
 gridTrip( [-22, 100], 'L2L15D50U1D9') //=> [-80, 83]
 -----------------------------------------------------------------*/
 // Your solution for 28-gridTrip here:
+function gridTrip(startingPosition, moves) {
+  let x = startingPosition[0];
+  let y = startingPosition[1];
+  let moveRegex = /([UDLR])(\d+)/g;
+  let match;
 
+  while (match = moveRegex.exec(moves)) {
+      let direction = match[1];
+      let units = parseInt(match[2]);
+      if (direction === 'U') {
+          x += units;
+      } else if (direction === 'D') {
+          x -= units;
+      } else if (direction === 'R') {
+          y += units;
+      } else if (direction === 'L') {
+          y -= units;
+      }
+  }
+
+  return [x, y];
+}
 
 
 

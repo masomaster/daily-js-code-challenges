@@ -912,7 +912,6 @@ function countTheBits(num) {
   }
   return count;
 }
-console.log(countTheBits(13))
 
 
 /*-----------------------------------------------------------------
@@ -1030,3 +1029,41 @@ totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------*/
 // Your solution for 30- here:
 
+function totalTaskTime(queue, numCPUs) {
+  // make a number of arrays equal to numCPUs (or one array with that many nested arrays?) 
+  if (!queue.length) return 0;
+  let CPUThreads = [];
+  for (let i = 0; i < numCPUs; i++ ) {
+    CPUThreads[i] = 0;
+  }
+
+  // proceed through the queue array, adding task to the array with the smallest total
+  for (let i = 0; i < queue.length; i++) {
+    const task = queue[i];
+    let shortestQueue = findShortestQueue(CPUThreads)
+    CPUThreads[shortestQueue] += task;
+  }
+
+  // find array with the largest total, and return that total
+  return CPUThreads[findLongestQueue(CPUThreads)]
+}
+
+function findShortestQueue(arr) {
+  let shortest = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < arr[shortest]) {
+      shortest = i;
+    }
+  }
+  return shortest;
+}
+
+function findLongestQueue(arr) {
+  let longest = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > arr[longest]) {
+      longest = i;
+    }
+  }
+  return longest;
+}
